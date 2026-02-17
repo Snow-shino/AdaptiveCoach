@@ -14,9 +14,12 @@ import com.example.adaptiveathlete.data.db.entity.*
         SetPlanEntity::class,
         WorkoutSessionEntity::class,
         SetEntryEntity::class,
-        DailyMetricsEntity::class
+        DailyMetricsEntity::class,
+        BenchmarkResultEntity::class,
+        ProgramEntity::class,
+        ScheduledWorkoutEntity::class
     ],
-    version = 1,
+    version = 3,
     exportSchema = false
 )
 @TypeConverters(Converters::class)
@@ -27,6 +30,9 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun setPlanDao(): SetPlanDao
     abstract fun workoutSessionDao(): WorkoutSessionDao
     abstract fun setEntryDao(): SetEntryDao
+    abstract fun programDao(): ProgramDao
+    abstract fun scheduledWorkoutDao(): ScheduledWorkoutDao
     abstract fun dailyMetricsDao(): DailyMetricsDao
+    abstract fun benchmarkResultDao(): BenchmarkResultDao
 }
 

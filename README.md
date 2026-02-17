@@ -1,391 +1,203 @@
-# Adaptive Athlete - Implementation Progress
+# Adaptive Athlete
 
-## ✅ What's Been Created
+> Fast workout tracking with rule-based progression and adaptive planning
 
-### 1. Design Documentation
-- **`/docs/design.md`** - Complete Game Design Document with all features, architecture, and roadmap
-- **`/docs/benchmark_test.md`** - Comprehensive testing protocol for tracking progress every 4 weeks
-
-### 2. Database Layer (Room)
-✅ **Entities Created:**
-- `ExerciseEntity` - Exercise definitions
-- `WorkoutTemplateEntity` - Workout templates
-- `TemplateExerciseEntity` - Exercise-to-template mappings
-- `SetPlanEntity` - Set targets (reps, weight, time)
-- `WorkoutSessionEntity` - Actual workout sessions
-- `SetEntryEntity` - Logged set data
-- `DailyMetricsEntity` - Daily tracking (weight, pain, adherence)
-
-✅ **DAOs Created:**
-- All CRUD operations for each entity
-- Flow-based queries for reactive UI
-- Special queries for progression (last completed session, etc.)
-
-✅ **Database Setup:**
-- `AppDatabase.kt` - Room database with type converters
-- `Converters.kt` - Enum and list type converters
-- `Enums.kt` - Exercise types, muscle groups, workout types
-
-### 3. Domain Logic
-✅ **Progression Engine** (`ProgressionEngine.kt`):
-- Automatic weight progression for weighted exercises
-- Rep progression for bodyweight exercises
-- Time progression for timed holds
-- Deload calculations
-- Rest time recommendations
-- **Full unit test suite** with 20+ test cases
-
-### 4. Dependency Injection
-✅ **Hilt Setup:**
-- `DatabaseModule.kt` - Provides all DAOs
-- `AdaptiveAthleteApp.kt` - Application class with @HiltAndroidApp
-- `MainActivity.kt` - Updated with @AndroidEntryPoint
-
-### 5. Seed Data
-✅ **Workout Templates** (`SeedDataRepository.kt`):
-- Pull Day A - Strength
-- Push Day A - Shoulders
-- Posterior Chain Day
-- Full Body Metabolic
-- **Daily Ritual (Netero Protocol)** - Dead hangs, scap pull-ups, rice bucket, hollow body
-- Aerobic Climbing Day
-- Power Climbing Day
-
-All templates include:
-- Exercise order
-- Target sets/reps/weight
-- Rest times
-- Form cues
-
-### 6. Dependencies Added
-✅ Updated `gradle/libs.versions.toml` and `app/build.gradle.kts` with:
-- Room 2.6.1
-- Hilt 2.50
-- Navigation Compose
-- Lifecycle ViewModel
-- Coroutines
-- Testing libraries (JUnit, MockK)
-- KSP (annotation processing)
+An Android app for busy athletes who want to log workouts in under 60 seconds and have their training plan automatically adjust based on adherence and performance.
 
 ---
 
-## ⚠️ Current Status
+## 🎯 Purpose
 
-The project structure is complete but **requires a Gradle sync** in Android Studio to resolve dependencies.
+Build a fast daily workout tracker (inspired by Playbook's table entry UX) that generates and adjusts training plans based on real adherence and performance data.
 
-**Why there are errors:**
-- Room/Hilt libraries haven't been downloaded yet (need Gradle sync)
-- This is normal for fresh project setup
+**Target User**: Busy lifter/climber who wants a structured plan, logs quickly, and wants automatic progression without overthinking.
 
 ---
 
-## 📋 Next Steps to Get Running
+## ✨ Core Outcomes
 
-### Step 1: Sync Project
-1. Open Android Studio
-2. Click "Sync Project with Gradle Files" button (top right)
-3. Wait for dependencies to download (~2-5 minutes)
-4. Build should succeed
+- ✅ **"I can log today's workout in under 60 seconds"**
+- ✅ **"My plan adapts next week if I miss sessions or underperform"**
+- ✅ **"I see progress in 3 metrics, not 30 charts"**
 
-### Step 2: Verify Database
-Run the unit tests to verify progression engine works:
-```bash
-./gradlew test
+---
+
+## 📱 Features
+
+### Today View - Fast Table Entry
+- **Single table** for the day's workout
+- **Inline entry** - no drilling into set details
+- **Swipe gestures**: Left to delete set, Right to duplicate
+- **Auto-fill**: Next set defaults to last set's values
+- **One-tap**: Add set, toggle complete, adjust weight/reps/RPE
+
+**Example:**
+```
+Exercise     | Set | Target      | Actual      | RPE | Done
+Squat        | 1   | 5 @ 135 lb  | 5 @ 135 lb  | 8   | ✅
+Bench Press  | 1   | 8 @ 185 lb  | 8 @ 185 lb  | 7   | ✅
 ```
 
-All 20+ progression tests should pass.
+### V6 Athlete Program
+A pre-built **4-week training block** designed to build strength, power, and technique for V6 climbing:
 
-### Step 3: Build UI (Next Phase)
+**Weekly Structure:**
+- **Sunday** - **Bouldering: Volume + Skill** - Movement efficiency & endurance
+- **Monday** - **Gym: Upper Body** - Heavy pulling (weighted pull-ups, bench, rows)
+- **Tuesday** - **Bouldering: Power** - Limit boulders, dynos, campus board
+- **Wednesday** - **Gym: Legs** - Squats, RDL, box jumps for explosive power
+- **Thursday** - **Bouldering: Finger Strength** - Hangboard protocol, V5-V6 attempts
+- **Friday** - **Cardio: Run + Core** - Cardio intervals + core work
+- **Saturday** - **Gym: Full Body** - Power cleans, OHP, farmer carries
 
-**Milestone 1: Home Screen**
-Create these files next:
-- `ui/home/HomeScreen.kt` - List of workout templates
-- `ui/home/HomeViewModel.kt` - Load templates, start workout
-- `data/repository/WorkoutRepository.kt` - Bridge between DAOs and UI
+**Progression:**
+- Week 1-2: Baseline, add small weight
+- Week 3: Hardest week (peak volume)
+- Week 4: Deload (20% volume reduction, Saturday off)
 
-**Milestone 2: Workout Table Screen**
-- `ui/workout/WorkoutTableScreen.kt` - Main logging UI
-- `ui/workout/WorkoutViewModel.kt` - Session state management
-- `ui/workout/components/ExerciseCard.kt` - Exercise with sets table
-- `ui/workout/components/SetRow.kt` - Editable set row
-- `ui/workout/components/NumericKeypad.kt` - Bottom sheet input
+**Daily Ritual:** Rice bucket work (3-5 min), 10k steps
 
-**Milestone 3: Session Management**
-- Create workout session from template
-- Prefill last workout's actuals
-- Autosave on every edit
-- Apply progression on finish
+Each workout displays as **"Activity Type: Focus"** format for quick calendar viewing.
+
+### Plan View
+- **Current week** (Mon-Sun) at a glance
+- Each day shows workout title + primary lifts
+- **Edit**: Reorder workouts, swap days, skip sessions
+- **Week-by-week progression** tracking
+
+### Program Quiz (Coming Soon)
+Users will answer questions to determine which program fits their goals:
+- Training days per week
+- Experience level
+- Primary goals (strength, V6 climbing, fat loss, etc.)
+- Available equipment
+- Recovery capacity
+
+### Progress Tracking
+Simple, actionable metrics:
+- **Adherence %** (last 7 and 30 days)
+- **Estimated 1RM trend** for 1-3 main lifts
+- **Weekly volume trend**
+
+### Adaptive Planning
+The app automatically adjusts your plan weekly based on:
+- **Adherence < 70%**: Reduce volume 10-20%, simplify workouts
+- **Consistently high RPE (≥9)**: Reduce load 2.5-5%
+- **Prescribed loads hit with RPE ≤8 for 2+ weeks**: Increase load 2.5-5% or add 1 rep
 
 ---
 
-## 🏗️ Architecture Overview
+## 🏗️ Tech Stack
+
+- **Language**: Kotlin
+- **UI**: Jetpack Compose (Material 3)
+- **Architecture**: MVVM
+- [x] **V6 Athlete Program** - Complete 4-week training block
+- [x] Program scheduling system
+- [x] 7 workout templates with exercises and sets
+- **Database**: Room (SQLite)
+- **DI**: Hilt
+- **Build**: Gradle (Kotlin DSL)
+- [ ] Plan view showing scheduled workouts
+- [ ] Program quiz to assign training plans
+
+## 🗄️ Data Model
+- [ ] Weekly adaptation rules engine
+
+### Core Entities
+- `UserProfile`: goal, daysPerWeek, units, equipment
+- `Program`: startDate, templateType, rulesVersion
+- [ ] Additional programs (Beginner, Intermediate, Hypertrophy)
+- `WorkoutDay`: date, title, status (planned, done, skipped)
+- `Exercise`: name, category, equipment, defaultRest
+- `PlannedSet`: targetReps, targetWeight, targetRPE
+- `LoggedSet`: actualReps, actualWeight, actualRPE, timestamp, completed
+- `WorkoutSummary`: volume, tonnage, PR flags, notes
+- `ProgressMetric`: e1RM by lift, adherence, volume
+
+---
+
+## 🚀 Development Roadmap
+
+### ✅ Completed
+- [x] Project structure and dependencies
+- [x] Room database with DAOs
+- [x] Seed data for exercises and templates
+- [x] Home screen with benchmark entry points
+- [x] Navigation setup
+
+### 🔨 In Progress
+- [ ] Today view with fast table entry
+- [ ] Plan generator (3-day and 4-day templates)
+- [ ] Weekly adaptation rules engine
+
+### 📋 Upcoming
+- [ ] Progress metrics calculation
+- [ ] Progress view with charts
+- [ ] Export functionality (CSV/JSON)
+- [ ] Settings screen
+
+---
+
+## 📐 Architecture
 
 ```
 app/
 ├── data/
-│   ├── db/
-│   │   ├── entity/      # Room entities (7 files)
-│   │   ├── dao/         # Data access objects (7 files)
-│   │   ├── AppDatabase.kt
-│   │   └── Converters.kt
-│   ├── model/
-│   │   └── Enums.kt     # ExerciseType, MuscleGroup, etc.
-│   └── repository/
-│       └── SeedDataRepository.kt
-│
+│   ├── local/
+│   │   ├── entities/       # Room entities
+│   │   ├── dao/            # Data access objects
+│   │   └── AppDatabase.kt
+│   └── repository/         # Data layer abstraction
 ├── domain/
-│   └── progression/
-│       └── ProgressionEngine.kt  # Pure Kotlin logic
-│
-├── di/
-│   └── DatabaseModule.kt  # Hilt dependency injection
-│
+│   ├── model/              # Domain models
+│   └── usecase/            # Business logic
 ├── ui/
-│   ├── theme/
-│   └── (home, workout, etc. - TO BE CREATED)
-│
-└── MainActivity.kt
+│   ├── screens/            # Composable screens
+│   ├── components/         # Reusable UI components
+│   └── theme/              # Material 3 theming
+└── di/                     # Hilt modules
 ```
 
 ---
 
-## 🧪 Testing Status
+## 🎨 Design Principles
 
-✅ **Unit Tests Created:**
-- `ProgressionEngineTest.kt` - 20+ test cases
-  - Weight progression (success, failure, edge cases)
-  - Rep progression (bodyweight exercises)
-  - Time progression (timed holds)
-  - Multi-set analysis
-  - Deload calculations
-  - Stall detection
-
-**Tests verify:**
-- User beats targets → weight increases
-- User fails → weight decreases or stays same
-- Pain level blocks progression
-- Conservative multi-set logic
-- Safety limits (no negative weights)
+1. **Speed First**: Log a workout in <60 seconds
+2. **No Nested Screens**: Everything accessible from the main table
+3. **Credible Progression**: Rule-based, not pretend-AI
+4. **Offline-First**: All data stored locally
+5. **Portfolio Quality**: Clean code, tested, documented
 
 ---
 
-## 📊 What the App Will Do (When UI is Complete)
+## 🧪 Testing
 
-### Daily Workflow
-1. **Open app** → See "Today's Workout" card
-2. **Tap Start** → Session created, all sets prefilled with last workout's values
-3. **Log sets inline** → Tap cell, numeric keypad appears, enter weight/reps, mark done
-4. **Rest timer starts automatically** after marking set done
-5. **Tap Finish** → RPE rating, see summary
-6. **Progression applied automatically** → Next workout's targets updated
+Run unit tests:
+```bash
+./gradlew test
+```
 
-### Weekly Check-in
-- Adherence percentage
-- Total volume
-- Exercises that progressed
-- Exercises that stalled (with recommendations)
-
-### Monthly Benchmark
-- Structured test battery (pull-ups, hangs, bodyweight, etc.)
-- Progress charts
-- Before/after comparisons
+Run on emulator:
+```bash
+./gradlew installDebug
+```
 
 ---
 
-## 🎯 Your Specific Goals Integrated
+## 📄 License
 
-From your request, here's what's built in:
-
-✅ **Daily Netero Ritual:**
-- Dead hangs (5×20s)
-- Hollow body (3×30s)
-- Scap pull-ups (2×10)
-- Rice bucket grip work (5 min)
-- Tracked daily with streak counter
-
-✅ **Progressive Overload:**
-- Automatic weight/rep increases
-- Tracks previous session
-- Adjusts based on performance
-
-✅ **Climbing Integration:**
-- Aerobic (ARC training)
-- Power (boulder projecting)
-- Hangboard protocols
-- Campus board ladders
-
-✅ **Core Strength:**
-- Hollow body holds
-- Weighted planks
-- Hanging leg raises
-- Integrated into all templates
-
-✅ **Fat Loss:**
-- Full body metabolic circuits
-- Posterior chain emphasis
-- High-volume "metabolism driver" days
-
-✅ **Injury Prevention:**
-- Daily tendon work
-- Rice bucket exercises
-- Mobility integration points
-- Pain tracking in set entries
+This project is for portfolio purposes.
 
 ---
 
-## 💡 Design Decisions Made
+## 👤 Author
 
-### 1. **Inline Editing (Like Playbook)**
-- All sets visible in one scrollable table
-- Tap cell → bottom-sheet keypad (fast, thumb-friendly)
-- No navigating to new screens per set
+Taylor - CS Student specializing in Android development
 
-### 2. **Automatic Progression**
-- Engine calculates next targets after every workout
-- User never manually adjusts weights
-- Conservative multi-set analysis (don't progress if 20%+ sets failed)
-
-### 3. **Offline-First**
-- All data in local SQLite (Room)
-- No network required
-- Optional cloud sync (future phase)
-
-### 4. **Safety-First Progression**
-- Pain level blocks increases
-- Stall detection (2 consecutive failures)
-- Auto-deload after 3 failures
-- Conservative increases (2.5-5 lb max)
-
-### 5. **Flexible Exercise Types**
-- Weighted (bench, rows, etc.)
-- Bodyweight (pull-ups, push-ups)
-- Timed (planks, dead hangs)
-- Climbing (boulder grades)
-- Cardio (running, ARC)
-
----
-
-## 🚀 When You're Ready: UI Checklist
-
-Once Gradle sync completes, start building screens in this order:
-
-### Phase 1: Core Flow
-- [ ] Home screen (template list)
-- [ ] Start workout (create session)
-- [ ] Workout table screen
-- [ ] Numeric keypad component
-- [ ] Mark set done + rest timer
-- [ ] Finish workout
-
-### Phase 2: Polish
-- [ ] Prefill last workout's actuals
-- [ ] Apply progression on finish
-- [ ] Session summary screen
-- [ ] History list
-
-### Phase 3: Analytics
-- [ ] Weekly check-in
-- [ ] Progress charts
-- [ ] Muscle balance analysis
-- [ ] Benchmark test logging
-
----
-
-## 📝 Sample Data Included
-
-When you first run the app (after calling `seedDatabase()`), you'll have:
-
-- **21 exercises** (pull-ups, rows, deadlifts, hangs, climbs, etc.)
-- **7 workout templates** ready to use
-- **Pull Day A** has 7 exercises, 29 total sets configured
-- **Daily Ritual** has 4 exercises (Netero protocol)
-
-All with proper:
-- Target reps/weight/time
-- Rest intervals
-- Form cues
-- Muscle group tags
-
----
-
-## 🔥 What Makes This Special
-
-**Compared to other workout apps:**
-
-1. **Truly automatic progression** - Not just suggesting, actually updating targets
-2. **Climbing-specific** - V-grades, ARC training, hangboard protocols
-3. **Daily ritual system** - Netero-inspired consistency tracking
-4. **Inline logging** - Fastest input method (Playbook-style)
-5. **Muscle balance AI** - Identifies weak links, recommends corrections
-6. **Pain tracking** - Prevents overtraining, forces rest
-7. **Benchmark system** - Objective testing separate from training
-
-**Your program integrated:**
-- 16-week Greed Island bootcamp structure
-- Daily touchpoints (morning, midday, night)
-- Rice bucket grip protocol
-- Weekly deloads
-- Phase-based periodization
-
----
-
-## 🎓 How to Use After UI is Built
-
-### First Time:
-1. Open app → onboarding
-2. Set goals (climbing, fat loss, strength)
-3. Enter current stats (bodyweight, max pull-ups)
-4. App recommends program
-5. Complete benchmark test
-
-### Daily:
-1. Check off daily ritual (morning)
-2. Start today's workout (tap once)
-3. Log sets as you go (inline, fast)
-4. Finish workout, rate RPE
-5. See tomorrow's updated targets
-
-### Weekly:
-1. Sunday: weekly check-in
-2. Review adherence, volume, progressions
-3. See recommendations
-4. Optional yoga sequence
-
-### Monthly:
-1. Retest benchmark battery
-2. Compare to previous test
-3. See trend charts
-4. Adjust program if needed
-
----
-
-## 📞 Next Move
-
-**Right now:**
-1. Sync Gradle in Android Studio
-2. Verify no compile errors
-3. Run unit tests (`./gradlew test`)
-4. Review design doc (`/docs/design.md`)
-
-**After sync succeeds, choose one:**
-
-**Option A: Build UI yourself**
-- Start with `HomeScreen.kt` and `HomeViewModel.kt`
-- I can provide exact code for each screen
-
-**Option B: I build the UI**
-- I'll create all screens
-- HomeScreen → WorkoutTableScreen → Finish flow
-- Fully working Milestone 1
-
-**Option C: Review & plan**
-- Go through design doc
-- Decide on any changes
-- Prioritize features
-
----
-
-Let me know when Gradle sync completes and which option you prefer! 💪
-
-The foundation is rock-solid. Database, progression engine, seed data, and tests are all production-ready. Now it's time to build the UI that brings it to life.
+**Portfolio Positioning:**
+- Built cross-platform app with offline-first SQLite persistence
+- Designed high-speed table-based logging UX to reduce friction  
+- Implemented rule-based weekly progression engine using adherence and performance signals
+- Built metrics pipeline for e1RM, volume, and adherence trends
 

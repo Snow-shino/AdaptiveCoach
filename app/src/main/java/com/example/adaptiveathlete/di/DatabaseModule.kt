@@ -61,5 +61,20 @@ object DatabaseModule {
     fun provideDailyMetricsDao(database: AppDatabase): DailyMetricsDao {
         return database.dailyMetricsDao()
     }
+
+    @Provides
+    fun provideBenchmarkResultDao(database: AppDatabase): BenchmarkResultDao {
+        return database.benchmarkResultDao()
+    }
+
+    @Provides
+    fun provideProgramDao(database: AppDatabase): ProgramDao {
+        return database.programDao()
+    }
+
+    @Provides
+    fun provideScheduledWorkoutDao(database: AppDatabase): ScheduledWorkoutDao {
+        return database.scheduledWorkoutDao()
+    }
 }
 

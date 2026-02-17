@@ -485,57 +485,6 @@ class SeedDataRepository @Inject constructor(
                 instructions = "1-3-5-7, explosive, feet on for now"
             )
         )
-                primaryMuscles = listOf(MuscleGroup.LOWER_BACK),
-                equipment = EquipmentType.BODYWEIGHT,
-                instructions = "Hyperextension bench, neutral spine"
-            ),
-
-            // Daily ritual
-            ExerciseEntity(
-                name = "Dead Hang",
-                type = ExerciseType.TIMED,
-                primaryMuscles = listOf(MuscleGroup.FOREARMS, MuscleGroup.BACK),
-                equipment = EquipmentType.PULL_UP_BAR,
-                instructions = "Open hand, passive hang"
-            ),
-            ExerciseEntity(
-                name = "Rice Bucket Grip Work",
-                type = ExerciseType.TIMED,
-                primaryMuscles = listOf(MuscleGroup.FOREARMS),
-                equipment = EquipmentType.NONE,
-                instructions = "30s each: open/close, flex/extend, circles"
-            ),
-
-            // Climbing
-            ExerciseEntity(
-                name = "Continuous Climbing (ARC)",
-                type = ExerciseType.CLIMBING,
-                primaryMuscles = listOf(MuscleGroup.FULL_BODY),
-                equipment = EquipmentType.CLIMBING_WALL,
-                instructions = "V2-V4, nose breathing, shake every 4-6 moves"
-            ),
-            ExerciseEntity(
-                name = "Boulder Projecting",
-                type = ExerciseType.CLIMBING,
-                primaryMuscles = listOf(MuscleGroup.FULL_BODY),
-                equipment = EquipmentType.CLIMBING_WALL,
-                instructions = "Work V4-V6 problems, stop when power drops"
-            ),
-            ExerciseEntity(
-                name = "Max Hang (Hangboard)",
-                type = ExerciseType.TIMED,
-                primaryMuscles = listOf(MuscleGroup.FOREARMS),
-                equipment = EquipmentType.HANGBOARD,
-                instructions = "Open hand, 10s max weight"
-            ),
-            ExerciseEntity(
-                name = "Campus Board Ladders",
-                type = ExerciseType.CLIMBING,
-                primaryMuscles = listOf(MuscleGroup.BACK, MuscleGroup.FOREARMS),
-                equipment = EquipmentType.CAMPUS_BOARD,
-                instructions = "1-3-5-7, explosive, feet on for now"
-            )
-        )
 
         exerciseDao.insertExercises(exercises)
 

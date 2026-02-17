@@ -47,6 +47,7 @@ enum class EquipmentType {
     DUMBBELL,
     KETTLEBELL,
     CABLE,
+    MACHINE,
     BODYWEIGHT,
     HANGBOARD,
     CAMPUS_BOARD,
