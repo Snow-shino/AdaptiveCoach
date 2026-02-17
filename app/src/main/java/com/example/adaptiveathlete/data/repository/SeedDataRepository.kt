@@ -34,7 +34,320 @@ class SeedDataRepository @Inject constructor(
 
     private suspend fun createExercises(): Map<String, Long> {
         val exercises = listOf(
-            // Pull exercises
+            // DAY A - Push / Shoulders / Core exercises
+            ExerciseEntity(
+                name = "Dumbbell Turkish Get Up",
+                type = ExerciseType.WEIGHTED,
+                primaryMuscles = listOf(MuscleGroup.SHOULDERS, MuscleGroup.ABS),
+                secondaryMuscles = listOf(MuscleGroup.FULL_BODY),
+                equipment = EquipmentType.DUMBBELL,
+                instructions = "Slow controlled movement, full range of motion"
+            ),
+            ExerciseEntity(
+                name = "Banded Face Pulls",
+                type = ExerciseType.WEIGHTED,
+                primaryMuscles = listOf(MuscleGroup.SHOULDERS),
+                equipment = EquipmentType.CABLE,
+                instructions = "Pull to face, external rotation, rear delts"
+            ),
+            ExerciseEntity(
+                name = "Kettlebell Lying Rotation",
+                type = ExerciseType.WEIGHTED,
+                primaryMuscles = listOf(MuscleGroup.SHOULDERS, MuscleGroup.ABS),
+                equipment = EquipmentType.KETTLEBELL,
+                instructions = "Controlled rotation, shoulder stability"
+            ),
+            ExerciseEntity(
+                name = "Wide Grip Dumbbell Bench Press",
+                type = ExerciseType.WEIGHTED,
+                primaryMuscles = listOf(MuscleGroup.CHEST),
+                secondaryMuscles = listOf(MuscleGroup.SHOULDERS, MuscleGroup.TRICEPS),
+                equipment = EquipmentType.DUMBBELL,
+                instructions = "Wide grip, chest stretch, controlled tempo"
+            ),
+            ExerciseEntity(
+                name = "Incline Bench Arnold Press",
+                type = ExerciseType.WEIGHTED,
+                primaryMuscles = listOf(MuscleGroup.SHOULDERS),
+                equipment = EquipmentType.DUMBBELL,
+                instructions = "Incline bench, rotate palms during press"
+            ),
+            ExerciseEntity(
+                name = "Alternating Underhand Dumbbell Front Raise",
+                type = ExerciseType.WEIGHTED,
+                primaryMuscles = listOf(MuscleGroup.SHOULDERS),
+                equipment = EquipmentType.DUMBBELL,
+                instructions = "Palms up, alternating arms, raise to eye level"
+            ),
+            ExerciseEntity(
+                name = "Dumbbell Shrugs",
+                type = ExerciseType.WEIGHTED,
+                primaryMuscles = listOf(MuscleGroup.BACK),
+                equipment = EquipmentType.DUMBBELL,
+                instructions = "Straight up, pause at top, squeeze traps"
+            ),
+            ExerciseEntity(
+                name = "Weighted Plank",
+                type = ExerciseType.TIMED,
+                primaryMuscles = listOf(MuscleGroup.ABS),
+                equipment = EquipmentType.BODYWEIGHT,
+                instructions = "Add plate on back, neutral spine, no sagging"
+            ),
+
+            // DAY B - Pull Strength exercises
+            ExerciseEntity(
+                name = "Scap Pinch Hangs",
+                type = ExerciseType.BODYWEIGHT,
+                primaryMuscles = listOf(MuscleGroup.BACK),
+                equipment = EquipmentType.PULL_UP_BAR,
+                instructions = "Just retract scapula, squeeze shoulder blades"
+            ),
+            ExerciseEntity(
+                name = "Resistance Band Pull Aparts",
+                type = ExerciseType.BODYWEIGHT,
+                primaryMuscles = listOf(MuscleGroup.SHOULDERS, MuscleGroup.BACK),
+                equipment = EquipmentType.RESISTANCE_BAND,
+                instructions = "Pull band apart, squeeze rear delts"
+            ),
+            ExerciseEntity(
+                name = "Rack Pull",
+                type = ExerciseType.WEIGHTED,
+                primaryMuscles = listOf(MuscleGroup.BACK, MuscleGroup.GLUTES, MuscleGroup.HAMSTRINGS),
+                equipment = EquipmentType.BARBELL,
+                instructions = "From knee height, heavy load, explosive pull"
+            ),
+            ExerciseEntity(
+                name = "Weighted Chin Up",
+                type = ExerciseType.WEIGHTED,
+                primaryMuscles = listOf(MuscleGroup.BACK, MuscleGroup.BICEPS),
+                equipment = EquipmentType.PULL_UP_BAR,
+                instructions = "Underhand grip, add weight belt, controlled tempo"
+            ),
+            ExerciseEntity(
+                name = "T-Bar Row",
+                type = ExerciseType.WEIGHTED,
+                primaryMuscles = listOf(MuscleGroup.BACK),
+                equipment = EquipmentType.BARBELL,
+                instructions = "Chest up, pull to sternum, squeeze back"
+            ),
+            ExerciseEntity(
+                name = "Rope Straight Arm Pushdown",
+                type = ExerciseType.WEIGHTED,
+                primaryMuscles = listOf(MuscleGroup.BACK),
+                equipment = EquipmentType.CABLE,
+                instructions = "Arms straight, lat activation, full stretch"
+            ),
+            ExerciseEntity(
+                name = "Cobra Cable Crossover",
+                type = ExerciseType.WEIGHTED,
+                primaryMuscles = listOf(MuscleGroup.BACK),
+                equipment = EquipmentType.CABLE,
+                instructions = "Crossover cables, squeeze shoulder blades"
+            ),
+            ExerciseEntity(
+                name = "Machine Crunch",
+                type = ExerciseType.WEIGHTED,
+                primaryMuscles = listOf(MuscleGroup.ABS),
+                equipment = EquipmentType.MACHINE,
+                instructions = "Controlled crunch, squeeze abs at bottom"
+            ),
+
+            // DAY C - Back Hypertrophy + Core exercises
+            ExerciseEntity(
+                name = "Hollow Rock",
+                type = ExerciseType.BODYWEIGHT,
+                primaryMuscles = listOf(MuscleGroup.ABS),
+                equipment = EquipmentType.BODYWEIGHT,
+                instructions = "Rock back and forth, lower back pressed down"
+            ),
+            ExerciseEntity(
+                name = "Seal Rows",
+                type = ExerciseType.WEIGHTED,
+                primaryMuscles = listOf(MuscleGroup.BACK),
+                equipment = EquipmentType.BARBELL,
+                instructions = "Chest supported, pull to sternum, last set 20 reps"
+            ),
+            ExerciseEntity(
+                name = "Dumbbell Pull Overs",
+                type = ExerciseType.WEIGHTED,
+                primaryMuscles = listOf(MuscleGroup.BACK, MuscleGroup.CHEST),
+                equipment = EquipmentType.DUMBBELL,
+                instructions = "Across bench, stretch lats, controlled movement"
+            ),
+            ExerciseEntity(
+                name = "Seated Dumbbell Rear Delt Flys",
+                type = ExerciseType.WEIGHTED,
+                primaryMuscles = listOf(MuscleGroup.SHOULDERS),
+                equipment = EquipmentType.DUMBBELL,
+                instructions = "Bent over, fly rear delts, squeeze at top"
+            ),
+            ExerciseEntity(
+                name = "Dumbbell Single Arm Lat Row",
+                type = ExerciseType.WEIGHTED,
+                primaryMuscles = listOf(MuscleGroup.BACK),
+                equipment = EquipmentType.DUMBBELL,
+                instructions = "One arm at a time, full stretch and squeeze"
+            ),
+            ExerciseEntity(
+                name = "Face Pulls",
+                type = ExerciseType.WEIGHTED,
+                primaryMuscles = listOf(MuscleGroup.SHOULDERS),
+                equipment = EquipmentType.CABLE,
+                instructions = "Pull to face, external rotation, rear delts"
+            ),
+            ExerciseEntity(
+                name = "Lying Leg Lifts",
+                type = ExerciseType.BODYWEIGHT,
+                primaryMuscles = listOf(MuscleGroup.ABS),
+                equipment = EquipmentType.BODYWEIGHT,
+                instructions = "Legs straight, lower back flat, controlled"
+            ),
+            ExerciseEntity(
+                name = "Reverse Crunch",
+                type = ExerciseType.BODYWEIGHT,
+                primaryMuscles = listOf(MuscleGroup.ABS),
+                equipment = EquipmentType.BODYWEIGHT,
+                instructions = "Bring knees to chest, curl lower back off ground"
+            ),
+
+            // DAY D - Legs / Posterior Chain exercises
+            ExerciseEntity(
+                name = "Frog Pumps",
+                type = ExerciseType.BODYWEIGHT,
+                primaryMuscles = listOf(MuscleGroup.GLUTES),
+                equipment = EquipmentType.BODYWEIGHT,
+                instructions = "Heels together, knees out, pump glutes"
+            ),
+            ExerciseEntity(
+                name = "Bodyweight Glute Bridge",
+                type = ExerciseType.BODYWEIGHT,
+                primaryMuscles = listOf(MuscleGroup.GLUTES),
+                equipment = EquipmentType.BODYWEIGHT,
+                instructions = "Drive through heels, squeeze glutes at top"
+            ),
+            ExerciseEntity(
+                name = "Plank Hip Drops",
+                type = ExerciseType.BODYWEIGHT,
+                primaryMuscles = listOf(MuscleGroup.ABS),
+                equipment = EquipmentType.BODYWEIGHT,
+                instructions = "Side plank, drop hip to ground and raise"
+            ),
+            ExerciseEntity(
+                name = "Bodyweight Good Mornings",
+                type = ExerciseType.BODYWEIGHT,
+                primaryMuscles = listOf(MuscleGroup.HAMSTRINGS, MuscleGroup.LOWER_BACK),
+                equipment = EquipmentType.BODYWEIGHT,
+                instructions = "Hinge at hips, chest up, hamstring stretch"
+            ),
+            ExerciseEntity(
+                name = "Trap Bar Deadlift",
+                type = ExerciseType.WEIGHTED,
+                primaryMuscles = listOf(MuscleGroup.GLUTES, MuscleGroup.HAMSTRINGS, MuscleGroup.BACK),
+                equipment = EquipmentType.BARBELL,
+                instructions = "Chest up, drive through heels, last set 20 reps"
+            ),
+            ExerciseEntity(
+                name = "Barbell Step Back Lunge",
+                type = ExerciseType.WEIGHTED,
+                primaryMuscles = listOf(MuscleGroup.QUADS, MuscleGroup.GLUTES),
+                equipment = EquipmentType.BARBELL,
+                instructions = "Step back, front knee 90°, controlled descent"
+            ),
+            ExerciseEntity(
+                name = "Leg Extensions",
+                type = ExerciseType.WEIGHTED,
+                primaryMuscles = listOf(MuscleGroup.QUADS),
+                equipment = EquipmentType.MACHINE,
+                instructions = "Full extension, squeeze quads at top"
+            ),
+            ExerciseEntity(
+                name = "Standing Calf Raise",
+                type = ExerciseType.WEIGHTED,
+                primaryMuscles = listOf(MuscleGroup.CALVES),
+                equipment = EquipmentType.MACHINE,
+                instructions = "Full stretch, rise on toes, pause at top"
+            ),
+
+            // DAY E - Arms + Core Density exercises
+            ExerciseEntity(
+                name = "Bench Dips",
+                type = ExerciseType.BODYWEIGHT,
+                primaryMuscles = listOf(MuscleGroup.TRICEPS),
+                equipment = EquipmentType.BODYWEIGHT,
+                instructions = "Elbows back, to failure, controlled tempo"
+            ),
+            ExerciseEntity(
+                name = "Hammer Curls",
+                type = ExerciseType.WEIGHTED,
+                primaryMuscles = listOf(MuscleGroup.BICEPS, MuscleGroup.FOREARMS),
+                equipment = EquipmentType.DUMBBELL,
+                instructions = "Neutral grip, no swinging, squeeze at top"
+            ),
+            ExerciseEntity(
+                name = "Close Grip Dumbbell Bench Press",
+                type = ExerciseType.WEIGHTED,
+                primaryMuscles = listOf(MuscleGroup.TRICEPS, MuscleGroup.CHEST),
+                equipment = EquipmentType.DUMBBELL,
+                instructions = "Dumbbells touching, elbows in, triceps focus"
+            ),
+            ExerciseEntity(
+                name = "Spider Curls",
+                type = ExerciseType.WEIGHTED,
+                primaryMuscles = listOf(MuscleGroup.BICEPS),
+                equipment = EquipmentType.DUMBBELL,
+                instructions = "Over incline bench, full stretch, peak contraction"
+            ),
+            ExerciseEntity(
+                name = "Dumbbell Supine Curls",
+                type = ExerciseType.WEIGHTED,
+                primaryMuscles = listOf(MuscleGroup.BICEPS),
+                equipment = EquipmentType.DUMBBELL,
+                instructions = "Lying back on bench, curl, full stretch"
+            ),
+            ExerciseEntity(
+                name = "Dumbbell Skull Crushers w a Twist",
+                type = ExerciseType.WEIGHTED,
+                primaryMuscles = listOf(MuscleGroup.TRICEPS),
+                equipment = EquipmentType.DUMBBELL,
+                instructions = "Lower to forehead, twist palms as you press"
+            ),
+            ExerciseEntity(
+                name = "Dumbbell Reverse Curl",
+                type = ExerciseType.WEIGHTED,
+                primaryMuscles = listOf(MuscleGroup.FOREARMS, MuscleGroup.BICEPS),
+                equipment = EquipmentType.DUMBBELL,
+                instructions = "Overhand grip, curl, forearm development"
+            ),
+            ExerciseEntity(
+                name = "Dumbbell Skull Crushers",
+                type = ExerciseType.WEIGHTED,
+                primaryMuscles = listOf(MuscleGroup.TRICEPS),
+                equipment = EquipmentType.DUMBBELL,
+                instructions = "Lower to forehead, elbows in, controlled"
+            ),
+            ExerciseEntity(
+                name = "Wrist to Knees",
+                type = ExerciseType.BODYWEIGHT,
+                primaryMuscles = listOf(MuscleGroup.ABS),
+                equipment = EquipmentType.BODYWEIGHT,
+                instructions = "Lying down, wrists touch knees, crunch"
+            ),
+            ExerciseEntity(
+                name = "Ankle Biters",
+                type = ExerciseType.BODYWEIGHT,
+                primaryMuscles = listOf(MuscleGroup.ABS),
+                equipment = EquipmentType.BODYWEIGHT,
+                instructions = "Reach for ankles side to side, fast reps"
+            ),
+            ExerciseEntity(
+                name = "Torso Twist",
+                type = ExerciseType.BODYWEIGHT,
+                primaryMuscles = listOf(MuscleGroup.ABS),
+                equipment = EquipmentType.BODYWEIGHT,
+                instructions = "Seated, twist torso side to side, obliques"
+            ),
+
+            // Original Pull exercises
             ExerciseEntity(
                 name = "Weighted Pull-ups",
                 type = ExerciseType.WEIGHTED,
@@ -51,25 +364,11 @@ class SeedDataRepository @Inject constructor(
                 instructions = "Just retract scapula, no arm bend"
             ),
             ExerciseEntity(
-                name = "Seal Rows",
-                type = ExerciseType.WEIGHTED,
-                primaryMuscles = listOf(MuscleGroup.BACK),
-                equipment = EquipmentType.BARBELL,
-                instructions = "Chest supported, pull to sternum"
-            ),
-            ExerciseEntity(
                 name = "DB Lat Rows",
                 type = ExerciseType.WEIGHTED,
                 primaryMuscles = listOf(MuscleGroup.BACK),
                 equipment = EquipmentType.DUMBBELL,
                 instructions = "One arm at a time, full stretch"
-            ),
-            ExerciseEntity(
-                name = "Face Pulls",
-                type = ExerciseType.WEIGHTED,
-                primaryMuscles = listOf(MuscleGroup.SHOULDERS),
-                equipment = EquipmentType.CABLE,
-                instructions = "Pull to face, external rotation"
             ),
             ExerciseEntity(
                 name = "Hanging Leg Raises",
@@ -86,7 +385,7 @@ class SeedDataRepository @Inject constructor(
                 instructions = "Lower back flat, arms overhead"
             ),
 
-            // Push exercises
+            // Original Push exercises
             ExerciseEntity(
                 name = "Incline Bench Press",
                 type = ExerciseType.WEIGHTED,
@@ -116,22 +415,8 @@ class SeedDataRepository @Inject constructor(
                 equipment = EquipmentType.DUMBBELL,
                 instructions = "Straight up, pause at top"
             ),
-            ExerciseEntity(
-                name = "Weighted Plank",
-                type = ExerciseType.TIMED,
-                primaryMuscles = listOf(MuscleGroup.ABS),
-                equipment = EquipmentType.BODYWEIGHT,
-                instructions = "Add plate on back, neutral spine"
-            ),
 
-            // Posterior chain
-            ExerciseEntity(
-                name = "Trap Bar Deadlift",
-                type = ExerciseType.WEIGHTED,
-                primaryMuscles = listOf(MuscleGroup.GLUTES, MuscleGroup.HAMSTRINGS, MuscleGroup.BACK),
-                equipment = EquipmentType.BARBELL,
-                instructions = "Chest up, drive through heels"
-            ),
+            // Original Posterior chain
             ExerciseEntity(
                 name = "Bulgarian Split Squat",
                 type = ExerciseType.WEIGHTED,
@@ -149,6 +434,57 @@ class SeedDataRepository @Inject constructor(
             ExerciseEntity(
                 name = "Back Extensions",
                 type = ExerciseType.BODYWEIGHT,
+                primaryMuscles = listOf(MuscleGroup.LOWER_BACK),
+                equipment = EquipmentType.BODYWEIGHT,
+                instructions = "Hyperextension bench, neutral spine"
+            ),
+
+            // Daily ritual
+            ExerciseEntity(
+                name = "Dead Hang",
+                type = ExerciseType.TIMED,
+                primaryMuscles = listOf(MuscleGroup.FOREARMS, MuscleGroup.BACK),
+                equipment = EquipmentType.PULL_UP_BAR,
+                instructions = "Open hand, passive hang"
+            ),
+            ExerciseEntity(
+                name = "Rice Bucket Grip Work",
+                type = ExerciseType.TIMED,
+                primaryMuscles = listOf(MuscleGroup.FOREARMS),
+                equipment = EquipmentType.NONE,
+                instructions = "30s each: open/close, flex/extend, circles"
+            ),
+
+            // Climbing
+            ExerciseEntity(
+                name = "Continuous Climbing (ARC)",
+                type = ExerciseType.CLIMBING,
+                primaryMuscles = listOf(MuscleGroup.FULL_BODY),
+                equipment = EquipmentType.CLIMBING_WALL,
+                instructions = "V2-V4, nose breathing, shake every 4-6 moves"
+            ),
+            ExerciseEntity(
+                name = "Boulder Projecting",
+                type = ExerciseType.CLIMBING,
+                primaryMuscles = listOf(MuscleGroup.FULL_BODY),
+                equipment = EquipmentType.CLIMBING_WALL,
+                instructions = "Work V4-V6 problems, stop when power drops"
+            ),
+            ExerciseEntity(
+                name = "Max Hang (Hangboard)",
+                type = ExerciseType.TIMED,
+                primaryMuscles = listOf(MuscleGroup.FOREARMS),
+                equipment = EquipmentType.HANGBOARD,
+                instructions = "Open hand, 10s max weight"
+            ),
+            ExerciseEntity(
+                name = "Campus Board Ladders",
+                type = ExerciseType.CLIMBING,
+                primaryMuscles = listOf(MuscleGroup.BACK, MuscleGroup.FOREARMS),
+                equipment = EquipmentType.CAMPUS_BOARD,
+                instructions = "1-3-5-7, explosive, feet on for now"
+            )
+        )
                 primaryMuscles = listOf(MuscleGroup.LOWER_BACK),
                 equipment = EquipmentType.BODYWEIGHT,
                 instructions = "Hyperextension bench, neutral spine"
